@@ -1,48 +1,89 @@
 # News Topic Classification Pipeline
 
-Welcome to the **News Topic Classification** project! This is an end-to-end Machine Learning pipeline that automatically reads a news article's text and classifies it into corresponding categories (such as *Business, Sci/Tech, Sports, or World News*).
+Welcome to the **News Topic Classification** project! This is an end-to-end Machine Learning ecosystem that automatically analyzes a news article's text and classifies it into one of four primary categories using advanced Natural Language Processing (NLP). 
+
+The app includes an integrated, ultra-modern Desktop UI powered by React, Electron, and a FastAPI machine learning backend.
 
 ## 🚀 Project Overview
 
-The core objective of this project is to take raw news data and build a complete AI system. 
-The system is divided into 4 major modules handled by different team members:
-1. **Data Collection**: Sourcing and extracting raw news data.
-2. **NLP Preprocessing**: Cleaning text, removing stop-words, and vectorizing natural language using TF-IDF.
-3. **Model Building & Evaluation**: Training Machine Learning models (Logistic Regression, Naive Bayes, Linear SVM) and picking the best one based on F1-metrics.
-4. **API & Interface**: Wrapping the trained model using FastAPI and providing an Electron/React Graphical User Interface (GUI) for end-users to interact with the classifier.
+The core objective of this project is to take raw news data and build a sophisticated AI application encompassing everything from data processing to a premium Graphical User Interface (GUI). 
+
+### 1. NLP Preprocessing
+Raw dataset text is cleaned (removing stop words, standardizing formats) and transformed into numerical features using a TF-IDF text vectorizer (`vectorizer.pkl`).
+
+### 2. Model Building & Evaluation
+The training sequence fits and compares three classical machine learning models:
+- Naive Bayes
+- Logistic Regression
+- Linear Support Vector Machines (SVM)
+
+After evaluating accuracy, precision, recall, and F1-score, the script dynamically saves the most performant model (`best_model.joblib`) for production inference. Our trained model currently utilizes **Logistic Regression** achieving a ~91% F1-score across all categories.
+
+### 3. FastAPI Backend
+The best model is loaded into memory, wrapped inside `predictor.py`, and exposed through a lightweight **FastAPI** server that enables HTTP-based semantic predictions.
+
+### 4. Modern Desktop Interface
+A visually stunning, **Glassmorphism-styled** Desktop Application built using **React** (via Vite) and wrapped natively with **Electron**. The UI is fully responsive, interactive, and features dynamic animations and glowing design tokens.
 
 ---
 
-## 🛠️ How to Work with the Project
+## 📊 Recognizable Categories
 
-To run this pipeline locally on your machine, follow these steps:
+The machine learning pipeline has been trained specifically to predict text belonging to the following categories:
+1. **Business**
+2. **Sci/Tech** (Science and Technology)
+3. **Sports**
+4. **World** (World News - including general Politics)
 
-### Step 1: Install Dependencies
-Ensure you have Python installed. You must install the requested packages for the Machine Learning and Data processing logic.
+*Note: Political articles are generally classified under "World" news.*
+
+---
+
+## 🛠️ Setup & Installation Instructions
+
+To run this complete pipeline locally, follow these simple steps:
+
+### Step 1: Install Python Dependencies
+For the Machine Learning and Backend API logic:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 2: Run the NLP Preprocessing
-Before a model can be trained, the raw dataset must be cleaned and transformed into numerical features. 
-Run the preprocessing script to generate the Text Vectorizer and Data Splits:
+### Step 2: Run the Machine Learning Pipeline (One-Time)
+Before launching the app, you must train the model so the API has something to serve! 
+Run these commands in order from the root directory:
+
+**1. Transform Data & Generate Vectorizer:**
 ```bash
 python preprocessing.py
 ```
-*(This will generate `vectorizer.pkl` and data splits inside the dataset folder)*
 
-### Step 3: Train & Save the ML Model
-Once the data is preprocessed, launch the model training sequence. This script will train 3 different model algorithms, compare them, build a Confusion Matrix graph in the `reports/` folder, and save the ultimate best model dynamically:
+**2. Train the Best ML Model:**
 ```bash
 python src/model_training.py
 ```
-*(This will save `best_model.joblib` inside the `models/` directory)*
 
-### Step 4: Test the Predictions
-To verify that the ML model works before integrating it into FastAPI, you can use the predictor service directly. It will return the top category and class probabilities:
+### Step 3: Install Frontend Dependencies
+Navigate to the `desktop-app` folder and install NPM packages:
 ```bash
-python src/predictor.py
+cd desktop-app
+npm install
 ```
 
-### Step 5: (Upcoming) Launch FastAPI & Frontend
-Once the backend team connects `predictor.py` to a FastAPI server, you will be able to launch `api/main.py` and run a Desktop Interface to query news articles interactively!
+---
+
+## 🔥 Running the Full Application
+
+We've configured a robust, unified start process that runs the frontend, backend, and desktop wrapper concurrently all from a single command!
+
+Open your terminal, navigate to the `desktop-app` directory, and run:
+```bash
+npm run electron:dev
+```
+
+**What this does:**
+1. Spins up the FastAPI Backend via Uvicorn (`http://localhost:8000`).
+2. Starts the Vite React development server for hot-reloading (`http://localhost:5173`).
+3. Launches the native **Electron Desktop Application**.
+
+You simply paste your text into the UI, click "Classify Article", and the app will smoothly animate and present the prediction logic directly from the ML backend!

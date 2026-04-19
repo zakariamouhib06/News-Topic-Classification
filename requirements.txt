@@ -4,3 +4,6 @@ numpy
 joblib
 matplotlib
 seaborn
+fastapi
+uvicorn
+pydantic

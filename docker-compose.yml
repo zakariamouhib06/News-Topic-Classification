@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: news-topic-classifier-api:latest
+    container_name: news-topic-api
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    # Optional environment variables can be provided here
+    # environment:
+    #   - ENVIRONMENT=production
+    #   - WORKERS=4

@@ -74,16 +74,21 @@ npm install
 
 ## 🔥 Running the Full Application
 
-We've configured a robust, unified start process that runs the frontend, backend, and desktop wrapper concurrently all from a single command!
+We offer two robust, unified start processes that run the frontend, backend, and desktop wrapper concurrently all from a single command!
 
+**Option A: Run with Local Backend (Development)**
 Open your terminal, navigate to the `desktop-app` directory, and run:
 ```bash
 npm run electron:dev
 ```
+*This spins up the FastAPI Backend natively via Python Uvicorn (`http://localhost:8000`), starts the React server (`http://localhost:5173`), and launches the Electron App.*
 
-**What this does:**
-1. Spins up the FastAPI Backend via Uvicorn (`http://localhost:8000`).
-2. Starts the Vite React development server for hot-reloading (`http://localhost:5173`).
-3. Launches the native **Electron Desktop Application**.
+**Option B: Run with Dockerized Backend (Production-Ready)**
+Open your terminal, navigate to the `desktop-app` directory, and run:
+```bash
+npm run electron:full
+```
+*This command uses Docker Compose to build and run an optimized ML container (`http://localhost:8000`), starts the React server, and launches the Electron App concurrently. Perfect if you don't want to rely on the local Python environment!*
 
-You simply paste your text into the UI, click "Classify Article", and the app will smoothly animate and present the prediction logic directly from the ML backend!
+**What happens next?**
+You simply paste your text into the UI, click "Classify Article", and the app will smoothly animate and present the prediction logic directly from the chosen ML backend!

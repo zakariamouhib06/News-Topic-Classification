@@ -10,7 +10,9 @@
     "electron": "wait-on tcp:5173 && cross-env IS_DEV=true electron .",
     "start": "concurrently \"npm run dev\" \"npm run electron\"",
     "api": "cd .. && python -m uvicorn api.main:app --reload",
-    "electron:dev": "concurrently \"npm run api\" \"npm run start\""
+    "api:docker": "cd .. && docker-compose up --build",
+    "electron:dev": "concurrently \"npm run api\" \"npm run start\"",
+    "electron:full": "concurrently \"npm run api:docker\" \"npm run start\""
   },
   "dependencies": {
     "react": "^18.2.0",

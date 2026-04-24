@@ -51,7 +51,11 @@ def preprocess_text(text):
 # =========================
 # 4. LOAD DATA
 # =========================
-df = pd.read_csv("data/processed/train_clean.csv")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(BASE_DIR, "data", "processed")
+MODELS_DIR = os.path.join(BASE_DIR, "models")
+
+df = pd.read_csv(os.path.join(DATA_DIR, "train_clean.csv"))
 print("Data loaded:", df.head())
 
 TEXT_COL = "Text"
@@ -90,17 +94,18 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Crée les dossiers si ils n'existent pas
-os.makedirs("models", exist_ok=True)
+os.makedirs(MODELS_DIR, exist_ok=True)
+os.makedirs(DATA_DIR, exist_ok=True)
 
 # =========================
 # 9. SAVE VECTORIZER
 # =========================
-joblib.dump(vectorizer, "models/vectorizer.pkl")
+joblib.dump(vectorizer, os.path.join(MODELS_DIR, "vectorizer.pkl"))
 print("Vectorizer saved!")
 
 
 # =========================
 # 10. SAVE SPLITS
 # =========================
-joblib.dump((X_train, X_test, y_train, y_test), "data/processed/splits.pkl")
+joblib.dump((X_train, X_test, y_train, y_test), os.path.join(DATA_DIR, "splits.pkl"))
 print("Preprocessing finished!")

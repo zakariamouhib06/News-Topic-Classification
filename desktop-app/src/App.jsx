@@ -9,7 +9,7 @@ function App() {
 
   const handleClassify = async () => {
     if (!text.trim()) return;
-    
+
     setLoading(true);
     setError(null);
     setResult(null);
@@ -31,7 +31,7 @@ function App() {
       if (data.error) {
         throw new Error(data.error);
       }
-      
+
       setResult(data);
     } catch (err) {
       setError(err.message || 'An error occurred during classification.');
@@ -52,7 +52,7 @@ function App() {
       <div className="app-container">
         <header className="header">
           <h1>News Topic Classifier</h1>
-          <p className="subtitle">Powered by Machine Learning</p>
+          <p className="subtitle">Powered by ADIA G3</p>
         </header>
 
         <div className="glass-panel">
@@ -72,7 +72,7 @@ function App() {
               />
               <div className="input-footer">
                 <span className="char-count">{text.length} characters</span>
-                <button 
+                <button
                   className={`classify-btn ${loading ? 'loading' : ''}`}
                   onClick={handleClassify}
                   disabled={loading || !text.trim()}
@@ -120,8 +120,8 @@ function App() {
                               <span className="prob-value">{(prob * 100).toFixed(1)}%</span>
                             </div>
                             <div className="progress-bar-bg">
-                              <div 
-                                className="progress-bar-fill" 
+                              <div
+                                className="progress-bar-fill"
                                 style={{ width: `${prob * 100}%` }}
                               ></div>
                             </div>

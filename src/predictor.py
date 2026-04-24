@@ -2,11 +2,15 @@ import os
 import joblib
 
 class PredictorService:
-    def __init__(self, models_path='models'):
+    def __init__(self, models_path=None):
         """
         Initializes the predictor by loading the saved models from disk.
         """
-        self.models_path = models_path
+        if models_path is None:
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            self.models_path = os.path.join(base_dir, 'models')
+        else:
+            self.models_path = models_path
         
         vectorizer_path = os.path.join(self.models_path, 'vectorizer.pkl')
         model_path = os.path.join(self.models_path, 'best_model.joblib')

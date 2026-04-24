@@ -328,6 +328,31 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.5) rgba(255, 255, 255, 0.05);
+}
+
+.prob-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.prob-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.prob-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #a855f7, #3b82f6);
+  border-radius: 10px;
+}
+
+.prob-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #9333ea, #2563eb);
 }
 
 .prob-item {

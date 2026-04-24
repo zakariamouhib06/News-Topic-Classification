@@ -10,13 +10,14 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
 
 class ModelTrainer:
-    def __init__(self, data_path='data/processed', models_path='models', reports_path='reports'):
+    def __init__(self, data_path=None, models_path=None, reports_path=None):
         """
-        Initializes the ModelTrainer.
+        Initializes the ModelTrainer.iop
         """
-        self.data_path = data_path
-        self.models_path = models_path
-        self.reports_path = reports_path
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.data_path = data_path or os.path.join(base_dir, 'data', 'processed')
+        self.models_path = models_path or os.path.join(base_dir, 'models')
+        self.reports_path = reports_path or os.path.join(base_dir, 'reports')
         
         # We wrap LinearSVC with CalibratedClassifierCV so it can predict probabilities (predict_proba)
         # which is often required by frontend/API to show "confidence score".

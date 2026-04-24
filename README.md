@@ -55,7 +55,7 @@ Run these commands in order from the root directory:
 
 **1. Transform Data & Generate Vectorizer:**
 ```bash
-python preprocessing.py
+python src/preprocessing.py
 ```
 
 **2. Train the Best ML Model:**
